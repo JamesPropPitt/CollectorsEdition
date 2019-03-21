@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+</head>
+<body>
+    <div class="container">
+        <div class ="header">
+            <h1>Login</h1>
+        </div>
+        <form name="login" onsubmit="return validateForm() ;" method="post">
+
+        <ul>
+        <li>Username: <input class ="username" type="text" name="username"></li>
+        <li>Password: <input class="password" type="password" name="password"></li>
+        </ul>
+
+        <input type="button" class="submit" value="Log in" name="submit" onclick="validate()">
+        </form>
+    </div>
+    <script>
+        function validate(){
+            var userName = document.login.username.value;
+            var passWord = document.login.password.value;
+            var validate = false;
+            var usernameArray = ["Person1", "Person2", "Person3"];
+            var passwordArray = ["123","456","789"];
+            for (var i = 0;
+                 i < usernameArray.length;
+                 i++);
+        {
+            if ((userName == usernameArray[i]) && (passWord == passwordArray[i]))
+            {
+                valid = true;
+                break;
+            }
+        }
+    
+        if (valid){
+            alert("yes");
+            window.location = "www.google.com";
+            return false;
+        }
+    }
+        
+    </script>
+</body>
