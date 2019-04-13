@@ -9,8 +9,10 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = {'username', 'email'}
+# Allows the user to update their username and email
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
-        model = Pofile
-        field = ['image']
+        model = Profile
+        fields = ['image']
+# Allows the user to update their image

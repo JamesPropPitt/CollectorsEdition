@@ -40,6 +40,8 @@
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                     {% else %}
                   <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                    <!-- This line, and all the other similar lines gather information from urls.py and uses that information to correctly display information on the relevant page. In this instance,
+                    it uses Django's in built login feature to display the login page -->
                     {% endif %}
                 </div>
               </div>
@@ -47,7 +49,7 @@
           </nav>
         </header>
 
-
+    <!-- This is the main content of the page which gets replaced depending on which page is loaded. This is where the page points to when using 'extends "userPosts/base.html"' -->
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
