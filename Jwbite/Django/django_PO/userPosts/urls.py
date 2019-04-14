@@ -3,10 +3,16 @@ from django.contrib import admin
 from . import views
 from django.contrib.auth import views as auth_views
 from userPosts import views as user_views
-from .views import PostListView
+from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView
 
 urlpatterns = [
     path('', PostListView.as_view(), name='userPosts-home'),
+    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    #pk = primary key ( the number of the post). pk is the naming convention of postdetail
+    path('post/new/', PostCreateView.as_view(), name='post-create'),
+    path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
+    # As explained in views.py it might not be appropriate for this to be in the final build
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('about/', views.about, name='userPosts-about'),
 ]
 

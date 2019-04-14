@@ -8,7 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type ="text/css" href="{% static 'userPosts/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'userPosts/main.css' %}">
         {% if title %}
         <title>
             Django Home page - {{ title }}
@@ -36,7 +36,8 @@
                 <!-- Navbar Right Side -->
                 <div class="navbar-nav">
                     {% if user.is_authenticated %}
-                    <a class="navbar-brand mr-4" href="{% url 'profile' %}">Welcome, {{ user.username }}</a>
+                    <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
+                    <a class="nav-item nav-link" href="{% url 'profile' %}">Welcome, {{ user.username }}</a>
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                     {% else %}
                   <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
