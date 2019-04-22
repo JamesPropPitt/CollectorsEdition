@@ -17,10 +17,3 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['image']
 # Allows the user to update their image
 
-class GameChoice(forms.Form):
-    gameid = forms.CharField(required=True, max_length=50, widget=forms.HiddenInput())
-    studentid = forms.CharField(required=True, max_length=50, widget=forms.HiddenInput())
-    votecodeid = forms.CharField(required=True, max_length=50, widget=forms.HiddenInput())
-    def clean(self):
-        student = Student.objects.filter(id=self.cleaned_data['studentid']).first()
-        votecode = VoteCode.objects.filter(id=self.cleaned_data['gameid']).first()
