@@ -23,3 +23,9 @@ class Profile(models.Model):
         # This gets the size of the image of the user's profile and scales it down to 300x300 pixels. This is because the size of the thumbnail is a circle of about 300x300 pixels
         # so any image bigger than that would take up unnecessary space on the website's storage and slow the website down.
 
+class Student(models.Model):
+    firstname = models.CharField(max_length=100)
+    lastname = models.CharField(max_length=100)
+    studentnum = models.CharField(max_length=10)
+    def __str__(self):
+        return "{} {} ({})".format(self.firstname, self.lastname, self.studentnum)

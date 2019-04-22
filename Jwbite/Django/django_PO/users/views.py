@@ -41,3 +41,4 @@ def profile(request):
     return render(request, 'users/profile.html', context)
 
     # Creating a context is a dictionary of keys which in this case are u_form and p_form; userupdate and profileupdate.
+

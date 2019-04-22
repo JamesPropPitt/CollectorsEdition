@@ -3,7 +3,7 @@ from django.contrib import admin
 from . import views
 from django.contrib.auth import views as auth_views
 from userPosts import views as user_views
-from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView
+from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, UserPostListView
 
 urlpatterns = [
     path('', PostListView.as_view(), name='userPosts-home'),
@@ -14,6 +14,7 @@ urlpatterns = [
     # As explained in views.py it might not be appropriate for this to be in the final build
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('about/', views.about, name='userPosts-about'),
+    path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
 ]
 
 # This is a very important .py file that works as a signpost for the website. When it receives an alert, it will point the website in the correct direction with the varying rulesets given.

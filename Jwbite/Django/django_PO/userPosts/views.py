@@ -7,12 +7,24 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import render, get_object_or_404
+from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import Group
+from django import template
+
+
 
 def home(request):
-    context = {
-        'posts': Post.objects.all()
-    }
-    return render(request, 'userPosts/previousSprints.html', context)
+    if user.is_authenticated:
+        context = {
+            'posts':Post.objects.filter(author=request.user)
+        }
+    if user.is_superuser:
+        context = {
+            'posts': Post.objects.all()
+        }
+        return render(request, 'userPosts/previousSprints.html', context)
     # This is what the program executes to populate the previousSprints page
 
 def about(request):
@@ -33,10 +45,22 @@ def profile(request):
 class PostListView(ListView):
     model = Post
     template_name = 'userPosts/previousSprints.html'
-    context_object_name ='posts'
-    ordering = ['-date_posted']
+    context_object_name = 'posts'
+    paginate_by = 5
 
     # This is a class based view which displays the relevant posts for the particular user in chronological order.
+
+class UserPostListView(ListView):
+    model = Post
+    template_name = 'userPosts/previousSprints.html'
+    context_object_name ='posts'
+    paginate_by = 20
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
+
+    # Paginates the posts on the page to display 1 per page (1 per sprint)
 
 class PostDetailView(DetailView):
     model = Post
@@ -76,6 +100,11 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
         # Write the current logged in user as the author, as such 'LoginRequiredMixin' is an import which requires the user to be logged in and makes them login otherwise
+
+register = template.Library()
+@register.filter(name='has_group')
+def has_group(user, group_name):
+    return user.groups.filter(name=group_name).exists()
 
 
 
