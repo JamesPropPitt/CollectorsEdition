@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post
+from .models import Post, Sprint
 from django.db.models import Q
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
@@ -12,7 +12,8 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import Group
 from django import template
-
+from django.urls import reverse_lazy
+from django.contrib.auth.decorators import user_passes_test
 
 
 def home(request):
@@ -105,6 +106,21 @@ register = template.Library()
 @register.filter(name='has_group')
 def has_group(user, group_name):
     return user.groups.filter(name=group_name).exists()
+
+    # This doesn't do anything but I'm not doing experimenting with it yet, sorry if you see this in the final hand-in. Just delete this.
+
+class SprintNumberSelect(LoginRequiredMixin, CreateView):
+    model = Sprint
+    fields = ['Sprint_Number']
+    success_url = reverse_lazy('pOwner')
+
+@user_passes_test(lambda u: u.is_superuser)
+def ProductOwnerView(request):
+    return render(request, 'userPosts/productOwner.html')
+    # This function requires the user to be logged in as a superuser and if they are, populates the product owner page for the user.
+
+
+
 
 
 

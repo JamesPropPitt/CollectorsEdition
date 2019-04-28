@@ -15,6 +15,8 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('about/', views.about, name='userPosts-about'),
     path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
+    path('sprint/', views.SprintNumberSelect.as_view(), name='sprint-select'),
+    path('productOwner/', views.ProductOwnerView, name='pOwner'),
 ]
 
 # This is a very important .py file that works as a signpost for the website. When it receives an alert, it will point the website in the correct direction with the varying rulesets given.

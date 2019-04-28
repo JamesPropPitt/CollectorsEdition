@@ -23,11 +23,11 @@ from users import views as user_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
+    #This doesn't do anything because I am unsure if there needs to be a register page for this product.
     path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='userPosts/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='userPosts/logout.html'), name='logout'),
     path('', include('userPosts.urls')),
-
 ]
 
 if settings.DEBUG:

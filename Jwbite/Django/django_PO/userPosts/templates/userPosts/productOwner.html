@@ -1,0 +1,29 @@
+{% extends "userPosts/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+        </div>
+      </div>
+      <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Product Owner Powers</legend>
+              {{ u_form|crispy }}
+              {{ p_form|crispy }}
+          </fieldset>
+          <div class="form-group">
+              <a class="btn btn-outline-secondary" href="{% url 'sprint-select' %}">Sprint Select</a>
+              <a class="btn btn-outline-secondary" href="#">Team management</a>
+              <!-- Either hwen I figure out how to add users to groups or if there's a simpler solution, this URL will be changed and given functionality --->
+
+          </div>
+      </form>
+    </div>
+{% endblock content %}
+
+<!-- This page displays the user's image and name for clarity on the Product Owner's behalf -->
